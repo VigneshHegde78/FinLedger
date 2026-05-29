@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "650505206929",
+    "project_id": "finledger-8c24a",
+    "storage_bucket": "finledger-8c24a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650505206929:android:ef4cd3dc011df68050d330",
+        "android_client_info": {
+          "package_name": "com.vhx.finledger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl_bbMyn-42baR1leOPcnkLvRm2dnFlpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
