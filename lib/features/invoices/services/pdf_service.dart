@@ -81,7 +81,7 @@ class PdfService {
                       pw.Divider(),
                       _buildPdfRow(
                         'Total Amount:',
-                        '\$${invoice.amount.toStringAsFixed(2)}',
+                        'Rs.${invoice.amount.toStringAsFixed(2)}',
                         isBold: true,
                       ),
                     ],

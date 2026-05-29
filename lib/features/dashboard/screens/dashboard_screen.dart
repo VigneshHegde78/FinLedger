@@ -79,16 +79,19 @@ class DashboardScreen extends StatelessWidget {
 
             final invoices = snapshot.data ?? [];
 
-            // 1. Calculate the Derived State (Math!)
+            // 1. Calculate the Derived State (Accurate Math!)
             double totalOutstanding = 0;
             double totalPaid = 0;
 
             for (var invoice in invoices) {
-              // Now we just add up all the paid amounts for the green pie slice
-              totalPaid += invoice.amountPaid;
-
-              // And the orange pie slice is whatever is left over!
-              totalOutstanding += (invoice.amount - invoice.amountPaid);
+              if (invoice.status == 'Paid') {
+                // If the status is officially Paid, the entire amount counts as paid!
+                totalPaid += invoice.amount;
+              } else {
+                // If it is Pending, we split it based on partial payments
+                totalPaid += invoice.amountPaid;
+                totalOutstanding += (invoice.amount - invoice.amountPaid);
+              }
             }
 
             return SingleChildScrollView(
@@ -168,7 +171,7 @@ class DashboardScreen extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            '\$${totalOutstanding.toStringAsFixed(2)}', // Dynamic data formatting
+            '₹${totalOutstanding.toStringAsFixed(2)}', // Dynamic data formatting
             style: const TextStyle(
               color: Colors.white,
               fontSize: 32,
@@ -324,7 +327,7 @@ class DashboardScreen extends StatelessWidget {
             ),
             const SizedBox(height: 2),
             Text(
-              '\$${amount.toStringAsFixed(2)}',
+              '₹${amount.toStringAsFixed(2)}',
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: AppColors.textPrimary,
@@ -341,9 +344,8 @@ class DashboardScreen extends StatelessWidget {
   // 2. THE NEW PENDING CUSTOMERS LIST
   // ============================================================================
   Widget _buildPendingActionList(List<InvoiceModel> allInvoices) {
-    // Filter down to only invoices that still need paying
     final pendingInvoices = allInvoices
-        .where((inv) => inv.amountPaid < inv.amount)
+        .where((inv) => inv.status == 'Pending')
         .toList();
 
     if (pendingInvoices.isEmpty) {
@@ -404,7 +406,7 @@ class DashboardScreen extends StatelessWidget {
                       'Due: ${invoice.dueDate.month}/${invoice.dueDate.day}/${invoice.dueDate.year}',
                     ),
                     trailing: Text(
-                      '\$${remaining.toStringAsFixed(2)}',
+                      '₹${remaining.toStringAsFixed(2)}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.orange,

@@ -172,7 +172,7 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
               const SizedBox(height: 20),
 
               CustomTextField(
-                label: 'Amount (\$)',
+                label: 'Amount (₹)',
                 hint: '0.00',
                 controller: _amountController,
                 keyboardType: const TextInputType.numberWithOptions(

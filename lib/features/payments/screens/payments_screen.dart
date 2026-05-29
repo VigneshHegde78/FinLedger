@@ -80,7 +80,7 @@ class PaymentsScreen extends StatelessWidget {
                 subtitle: Text('ID: ${payment.invoiceId}\nDate: $dateStr'),
                 isThreeLine: true,
                 trailing: Text(
-                  '+\$${payment.amount.toStringAsFixed(2)}',
+                  '+₹${payment.amount.toStringAsFixed(2)}',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -264,7 +264,7 @@ class _RecordPaymentFormState extends State<RecordPaymentForm> {
                       return DropdownMenuItem(
                         value: invoice,
                         child: Text(
-                          '${invoice.clientName} - \$${remaining.toStringAsFixed(2)} remaining',
+                          '${invoice.clientName} - ₹${remaining.toStringAsFixed(2)} remaining',
                         ),
                       );
                     }).toList(),
@@ -286,7 +286,7 @@ class _RecordPaymentFormState extends State<RecordPaymentForm> {
               const SizedBox(height: 16),
 
               CustomTextField(
-                label: 'Amount Paid (\$)',
+                label: 'Amount Paid (₹)',
                 hint: '0.00',
                 controller: _amountController,
                 keyboardType: const TextInputType.numberWithOptions(
@@ -302,7 +302,7 @@ class _RecordPaymentFormState extends State<RecordPaymentForm> {
                     final remaining =
                         _selectedInvoice!.amount - _selectedInvoice!.amountPaid;
                     if (parsed > remaining) {
-                      return 'Cannot pay more than \$${remaining.toStringAsFixed(2)}';
+                      return 'Cannot pay more than ₹${remaining.toStringAsFixed(2)}';
                     }
                   }
                   return null;

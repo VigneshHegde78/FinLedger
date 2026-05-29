@@ -171,11 +171,11 @@ class _InvoiceCard extends StatelessWidget {
     // Dynamic text based on partial payments
     String amountDisplay;
     if (isPaid) {
-      amountDisplay = '\$${invoice.amount.toStringAsFixed(2)}';
+      amountDisplay = '₹${invoice.amount.toStringAsFixed(2)}';
     } else if (invoice.amountPaid > 0) {
-      amountDisplay = '\$${remainingBalance.toStringAsFixed(2)} left';
+      amountDisplay = '₹${remainingBalance.toStringAsFixed(2)} left';
     } else {
-      amountDisplay = '\$${invoice.amount.toStringAsFixed(2)}';
+      amountDisplay = '₹${invoice.amount.toStringAsFixed(2)}';
     }
 
     return Card(
@@ -210,7 +210,7 @@ class _InvoiceCard extends StatelessWidget {
             if (invoice.amountPaid > 0 && !isPaid) ...[
               const SizedBox(height: 4),
               Text(
-                'Paid: \$${invoice.amountPaid.toStringAsFixed(2)} of \$${invoice.amount.toStringAsFixed(2)}',
+                'Paid: ₹${invoice.amountPaid.toStringAsFixed(2)} of ₹${invoice.amount.toStringAsFixed(2)}',
                 style: const TextStyle(fontSize: 12, color: Colors.orange),
               ),
             ],
@@ -395,7 +395,7 @@ class _EditInvoiceFormState extends State<_EditInvoiceForm> {
               const SizedBox(height: 24),
 
               const Text(
-                'Total Amount (\$)',
+                'Total Amount (₹)',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   color: AppColors.textPrimary,
